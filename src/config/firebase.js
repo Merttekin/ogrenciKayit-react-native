@@ -10,5 +10,5 @@ var config = {
 };
 // firebase.initializeApp(config);
 
-export default firebase;
+export default config;
 

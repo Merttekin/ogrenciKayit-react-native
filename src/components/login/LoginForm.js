@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, Alert, View } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged } from '../../actions';
+import { emailChanged, passwordChanged, loginUser } from '../../actions';
 import Button from '../button/Button';
 import Card from '../card/Card';
 import CardSection from '../card/CardSection';
@@ -40,6 +40,8 @@ class LoginForm extends Component {
     return <Spinner size="small" />;
   }
   render() {
+    console.log('email: ' + this.props.email);
+    console.log('password: ' + this.props.password);
     const { inputStyle } = styles;
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -83,4 +85,13 @@ const styles = {
 
 };
 
-export default connect(null, {emailChanged, passwordChanged})(LoginForm);
+const mapStateToProps = ({ authenticationResponse }) => {
+  const { email, password, loading } = authenticationResponse;
+  return{
+    email,
+    password,
+    loading
+  }
+}
+
+export default connect(mapStateToProps, {emailChanged, passwordChanged, loginUser})(LoginForm);

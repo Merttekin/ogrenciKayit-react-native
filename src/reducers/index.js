@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
+import authenticationReducers from './authenticationReducers';
 
 export default combineReducers({
-    student: () => []
+    authenticationResponse: authenticationReducers
 });
