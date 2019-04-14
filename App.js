@@ -10,7 +10,7 @@ import config from './src/config/firebase';
 import Router from './src/Router';
 
 
-export default class App extends Component {
+export default class App extends Component<{}> {
   componentWillMount(){
     firebase.initializeApp(config);
   }
