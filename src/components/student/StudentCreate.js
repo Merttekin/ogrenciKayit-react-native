@@ -4,18 +4,28 @@ import { View, Text, TextInput, Picker } from 'react-native';
 import Button from '../button/Button';
 import Card from '../card/Card';
 import CardSection from '../card/CardSection';
-import { studentChange } from '../../actions';
+import Spinner from '../spinner/Spinner';
+import { studentChange, studentCreate } from '../../actions';
 
 class StudentCreate extends Component {
 
     clickSave() {
+        const { studentName, surname, studentNumber, sube } = this.props;
 
+        this.props.studentCreate({ studentName, surname, studentNumber, sube });
     }
+
+    renderButton() {
+        if (!this.props.loading) {
+          return <Button onPress={this.clickSave.bind(this)}> KAYDET </Button>;
+        }
+        return <Spinner size="small" />;
+      }
 
     render() {
         const { inputStyle } = styles;
         return (
-            <View>
+            <Card>
                 <CardSection>
                     <TextInput
                         placeholder="İsim"
@@ -59,9 +69,9 @@ class StudentCreate extends Component {
 
 
                 <CardSection>
-                    <Button onPress={this.clickSave.bind(this)}> KAYDET </Button>
+                    { this.renderButton() }
                 </CardSection>
-            </View>
+            </Card>
         )
     }
 }
@@ -78,8 +88,8 @@ const styles = {
 };
 
 const mapStateToProps = ({ StudentsListResponse }) => {
-    const { studentName, surname, studentNumber, sube } = StudentsListResponse;
-    return { studentName, surname, studentNumber, sube };
+    const { studentName, surname, studentNumber, sube, loading } = StudentsListResponse;
+    return { studentName, surname, studentNumber, sube, loading };
 }
 
-export default connect(mapStateToProps, { studentChange })(StudentCreate);
+export default connect(mapStateToProps, { studentChange, studentCreate })(StudentCreate);

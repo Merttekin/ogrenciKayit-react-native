@@ -8,6 +8,8 @@ const RouterComponent = () => {
     return (
         <Router>
             <Scene key="kimlik">
+
+                <Scene key="login" component={LoginForm} title="Giriş Ekranı" />
                 <Scene
                     onRight={() => Actions.studentCreate()}
                     rightTitle="Yeni"
@@ -20,7 +22,6 @@ const RouterComponent = () => {
                     component={StudentCreate}
                     title="Öğrenci Kaydet"
                 />
-                <Scene key="login" component={LoginForm} title="Giriş Ekranı" />
 
             </Scene>
         </Router>
